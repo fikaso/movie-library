@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { addMovie, editMovie, selectMovies } from '../../redux/moviesSlice';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addMovie, editMovie } from '../../redux/moviesSlice';
 
 function MovieInput() {
   const [title, setTitle] = useState('');
   const [year, setYear] = useState('');
   const editMode = useParams();
-  const movies = useSelector(selectMovies);
+  const { state } = useLocation();
+
+  useEffect(() => {
+    if (state) {
+      setTitle(state.prevTitle);
+      setYear(state.prevYear);
+    }
+  }, [state]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,7 +44,6 @@ function MovieInput() {
 
     navigate('/');
   };
-
   return (
     <div>
       {editMode.id ? <h2>Edit movie</h2> : <h2>Create a new movie</h2>}

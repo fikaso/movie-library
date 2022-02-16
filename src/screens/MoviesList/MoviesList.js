@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMovie, getMovies, selectMovies } from '../../redux/moviesSlice';
@@ -29,7 +29,16 @@ function MoviesList() {
             <button onClick={() => dispatch(deleteMovie({ id: movie.id }))}>
               Remove
             </button>
-            <button onClick={() => navigate(`/editMovie/${movie.id}`)}>
+            <button
+              onClick={() =>
+                navigate(`/editMovie/${movie.id}`, {
+                  state: {
+                    prevTitle: movie.name,
+                    prevYear: movie.year,
+                  },
+                })
+              }
+            >
               Edit
             </button>
           </div>
