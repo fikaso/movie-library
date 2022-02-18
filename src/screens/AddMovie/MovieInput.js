@@ -11,10 +11,18 @@ import { DropImageArea } from '../../style/components/DropImageArea';
 import { CreateMovie } from '../../style/components/CreateMovie';
 import { Form } from '../../style/components/Form';
 import Header from '../../components/Header';
-
+import { useDropzone } from 'react-dropzone';
 function MovieInput() {
   const [title, setTitle] = useState('');
   const [year, setYear] = useState('');
+  const [image, setImage] = useState(null);
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop: (acceptedFiles) => {
+      setImage(acceptedFiles[0]);
+    },
+  });
+
   const editMode = useParams();
   const { state } = useLocation();
 
@@ -22,6 +30,7 @@ function MovieInput() {
     if (state) {
       setTitle(state.prevTitle);
       setYear(state.prevYear);
+      setImage(state.image);
     }
   }, [state]);
 
@@ -37,6 +46,7 @@ function MovieInput() {
           title: title,
           year: year,
           id: editMode.id,
+          image: image,
         })
       );
     } else {
@@ -44,6 +54,7 @@ function MovieInput() {
         addMovie({
           title: title,
           year: year,
+          image: image,
         })
       );
     }
@@ -60,9 +71,22 @@ function MovieInput() {
       </Header>
 
       <CreateMovie>
-        <DropImageArea>
-          <Upload />
-          <TextSmall>Drop an image here</TextSmall>
+        <DropImageArea {...getRootProps()}>
+          <input {...getInputProps()} />
+          {image ? (
+            <img
+              src={
+                typeof image === 'object' ? URL.createObjectURL(image) : image
+              }
+              style={{ width: '100%' }}
+              alt="preview"
+            />
+          ) : (
+            <>
+              <Upload />
+              <TextSmall>Drop an image here</TextSmall>
+            </>
+          )}
         </DropImageArea>
         <Form>
           <form onSubmit={handleSubmit}>

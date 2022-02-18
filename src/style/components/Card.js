@@ -27,6 +27,7 @@ export const CardImage = styled.div`
   position: relative;
   width: ${calcFontSize(266)};
   height: ${calcFontSize(400)};
+  cursor: pointer;
   ${setSpacing(2)};
   &::before {
     content: '';

@@ -10,6 +10,7 @@ export const getMovies = createAsyncThunk('movies/get', async () => {
       },
     }
   );
+  // console.log('response: ', response);
   return response.json();
 });
 
@@ -28,14 +29,14 @@ export const deleteMovie = createAsyncThunk('movie/delete', async ({ id }) => {
 
 export const addMovie = createAsyncThunk(
   'movie/add',
-  async ({ title, year }) => {
+  async ({ title, year, image }) => {
     const movieData = {
       name: title,
       publicationYear: parseInt(year),
     };
     const formData = new FormData();
     formData.append('data', JSON.stringify(movieData));
-    formData.append('files.poster', null);
+    formData.append('files.poster', image);
     const response = await fetch(`${process.env.REACT_APP_MOVIES_URL}`, {
       body: formData,
       method: 'POST',
@@ -44,6 +45,9 @@ export const addMovie = createAsyncThunk(
       },
     });
 
+    const localImage = URL.createObjectURL(image);
+
+    // console.log('response: ', response);
     return response.json();
   }
 );
@@ -82,11 +86,13 @@ export const moviesSlice = createSlice({
       state.status = 'loading';
     },
     [getMovies.fulfilled]: (state, action) => {
+      // console.log('get action: ', action.payload);
       state.movies = [];
       action.payload.data.map((movie) =>
         state.movies.push({
           name: movie.attributes.name,
           year: movie.attributes.publicationYear,
+          image: movie.attributes.poster.data?.attributes.url,
           id: movie.id,
         })
       );
@@ -110,11 +116,13 @@ export const moviesSlice = createSlice({
     [addMovie.pending]: (state) => {
       state.status = 'loading';
     },
-    [addMovie.fulfiled]: (state, action) => {
+    [addMovie.fulfilled]: (state, action) => {
+      // console.log('add action: ', action);
       state.movies.push({
-        name: action.payload.attributes.name,
-        year: action.payload.attributes.publicationYear,
-        id: action.payload.id,
+        name: action.payload.data.attributes.name,
+        year: action.payload.data.attributes.publicationYear,
+        image: URL.createObjectURL(action.meta.arg.image),
+        id: action.payload.data.id,
       });
       state.status = 'success';
     },
@@ -124,12 +132,14 @@ export const moviesSlice = createSlice({
     [editMovie.pending]: (state) => {
       state.status = 'loading';
     },
-    [editMovie.fulfiled]: (state, action) => {
+    [editMovie.fulfilled]: (state, action) => {
+      // console.log('edit action: ', action);
       state.movies = state.movies.map((movie) => {
         if (movie.id === action.payload.id) {
           return {
             name: action.payload.attributes.name,
             year: action.payload.attributes.publicationYear,
+            image: action.payload.attributes.files.poster,
             id: action.payload.id,
           };
         } else {

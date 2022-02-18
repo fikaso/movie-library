@@ -37,8 +37,9 @@ export const Button = styled(ButtonDefault)`
       max-width: ${calcFontSize(202)};
     `}
     ${(props) =>
-    props.large &&
+    props.mini &&
     css`
-      max-width: ${calcFontSize(300)};
+      max-width: ${calcFontSize(50)};
+      background-color: ${(props) => props.theme.colors.error};
     `}
 `;

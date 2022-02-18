@@ -1,20 +1,19 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  deleteMovie,
-  getMovies,
-  selectMovies,
-} from '../../../redux/moviesSlice';
-import { MoviesStyled } from '../../../style/screens/MoviesList';
-import { Button } from '../../../style/components/Button';
-import { H2 } from '../../../style/components/Heading';
-import Movie from '../component/MoviesListComponent';
-import Header from '../../../components/Header';
-import { logOut } from '../../../redux/userSlice';
-import { TextRegular } from '../../../style/components/Text';
-import { Logout } from '../../../style/components/Logout';
-import LogoutIcon from '../../../style/icons/Logout';
+import { deleteMovie, getMovies, selectMovies } from '../../redux/moviesSlice';
+import { MoviesStyled } from '../../style/screens/MoviesList';
+import { Button } from '../../style/components/Button';
+import { H2 } from '../../style/components/Heading';
+import Movie from './components/Movie';
+import Header from '../../components/Header';
+import { logOut } from '../../redux/userSlice';
+import { TextRegular } from '../../style/components/Text';
+import { Logout } from '../../style/components/Logout';
+import LogoutIcon from '../../style/icons/Logout';
+import Add from '../../style/icons/Add';
+import { Flex } from '../../style/components/Flex';
+import { Container } from '../../style/components/Container';
 
 function MoviesList() {
   const dispatch = useDispatch();
@@ -22,13 +21,20 @@ function MoviesList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getMovies());
-  }, [dispatch]);
+    if (movies?.status === null) {
+      dispatch(getMovies());
+    }
+  }, [dispatch, movies]);
 
   return (
-    <>
+    <Container>
       <Header>
-        <H2>My movies</H2>
+        <Flex direction="row">
+          <H2>My movies</H2>
+          <Link to="/addMovie">
+            <Add />
+          </Link>
+        </Flex>
         <Logout onClick={() => dispatch(logOut())}>
           <TextRegular>Logout</TextRegular>
           <LogoutIcon />
@@ -46,6 +52,7 @@ function MoviesList() {
                   state: {
                     prevTitle: movie.name,
                     prevYear: movie.year,
+                    image: movie.image,
                   },
                 })
               }
@@ -53,15 +60,15 @@ function MoviesList() {
             />
           ))
         ) : (
-          <>
+          <Flex direction="column">
             <H2>Your movie list is empty</H2>
             <Link to="/addMovie">
               <Button large>Add a new movie</Button>
             </Link>
-          </>
+          </Flex>
         )}
       </MoviesStyled>
-    </>
+    </Container>
   );
 }
 

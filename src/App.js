@@ -3,7 +3,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AddMovie from './screens/AddMovie/MovieInput';
 import EditMovie from './screens/AddMovie/MovieInput';
 import Login from './screens/Login/Login';
-import MoviesList from './screens/MoviesList/container/MoviesList';
+import MoviesList from './screens/MoviesList/MoviesList';
 import GlobalStyle from './style/global';
 import Theme from './style/theme';
 
