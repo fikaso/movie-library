@@ -3,6 +3,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login, selectUser } from '../../redux/userSlice';
+import { Button } from '../../style/components/Button';
+import { H1 } from '../../style/components/Heading';
+import { Input } from '../../style/components/Input';
+import { LoginStyled, LoginWrapper } from '../../style/screens/Login';
+import { TextSmall } from '../../style/components/Text';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -28,16 +33,17 @@ function Login() {
   };
 
   return (
-    <div>
+    <LoginStyled>
+      <H1>Sign in</H1>
       <form onSubmit={handleSubmit}>
         <div>
-          <input
+          <Input
             type="text"
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             value={email}
           />
-          <input
+          <Input
             type="text"
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
@@ -46,11 +52,13 @@ function Login() {
         </div>
         <div>
           <input type="checkbox" />
-          <label>Remember me</label>
+          <TextSmall>Remember me</TextSmall>
         </div>
-        <button type="submit">SUBMIT</button>
+        <Button large type="submit">
+          Login
+        </Button>
       </form>
-    </div>
+    </LoginStyled>
   );
 }
 

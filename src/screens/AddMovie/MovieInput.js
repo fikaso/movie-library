@@ -2,6 +2,15 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addMovie, editMovie } from '../../redux/moviesSlice';
+import { H2 } from '../../style/components/Heading';
+import { Input } from '../../style/components/Input';
+import { Button } from '../../style/components/Button';
+import Upload from '../../style/icons/Upload';
+import { TextSmall } from '../../style/components/Text';
+import { DropImageArea } from '../../style/components/DropImageArea';
+import { CreateMovie } from '../../style/components/CreateMovie';
+import { Form } from '../../style/components/Form';
+import Header from '../../components/Header';
 
 function MovieInput() {
   const [title, setTitle] = useState('');
@@ -45,31 +54,41 @@ function MovieInput() {
     navigate('/');
   };
   return (
-    <div>
-      {editMode.id ? <h2>Edit movie</h2> : <h2>Create a new movie</h2>}
-      <div>Drop an image here</div>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Publication year"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-          />
+    <>
+      <Header>
+        {editMode.id ? <H2>Edit movie</H2> : <h2>Create a new movie</h2>}
+      </Header>
 
-          <div>
-            <input type="submit" />
-            <button onClick={() => navigate('/')}>Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
+      <CreateMovie>
+        <DropImageArea>
+          <Upload />
+          <TextSmall>Drop an image here</TextSmall>
+        </DropImageArea>
+        <Form>
+          <form onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Publication year"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+            />
+
+            <div>
+              <Button secondary type="submit">
+                Submit
+              </Button>
+              <Button onClick={() => navigate('/')}>Cancel</Button>
+            </div>
+          </form>
+        </Form>
+      </CreateMovie>
+    </>
   );
 }
 
