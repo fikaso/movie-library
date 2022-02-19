@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { calcFontSize, setFontSize } from '../typo';
+import { calcFontSize, setFontSize } from '../UI/typo';
 
 const InputDefault = styled.input`
   ${setFontSize(14, 16, 24)}

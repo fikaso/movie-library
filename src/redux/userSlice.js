@@ -34,7 +34,6 @@ export const userSlice = createSlice({
       state.user = {
         name: action.payload.user.username,
         email: action.payload.user.email,
-        jwt: action.payload.jwt,
       };
       localStorage.setItem('login_token', action.payload.jwt);
       state.status = 'success';

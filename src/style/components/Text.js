@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { setFontSize } from '../../style/typo';
+import { setFontSize } from '../../style/UI/typo';
 
 export const TextLarge = styled.span`
   ${setFontSize(20, 16, 32)}

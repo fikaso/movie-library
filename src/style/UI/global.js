@@ -2,10 +2,14 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 
+
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
   html {
   font-size: ${(props) => props.theme.font.base};
 }
+
+
 
   body {
     margin: 0;
@@ -15,8 +19,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
     color: ${(props) => props.theme.colors.text};
     background-color: ${(props) => props.theme.colors.backgroundColor};
+    height: 100vh;
   }
-
 
   h1, h2, h3, h4, h5, h6 {
     margin: 0;

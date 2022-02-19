@@ -65,7 +65,7 @@ function MovieInput() {
     navigate('/');
   };
   return (
-    <>
+    <div>
       <Header>
         {editMode.id ? <H2>Edit movie</H2> : <h2>Create a new movie</h2>}
       </Header>
@@ -112,7 +112,7 @@ function MovieInput() {
           </form>
         </Form>
       </CreateMovie>
-    </>
+    </div>
   );
 }
 

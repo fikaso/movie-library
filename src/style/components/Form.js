@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { setSpacing } from '../spacing';
+import { setSpacing } from '../UI/spacing';
 
 export const Form = styled.div`
   margin-left: 127px;

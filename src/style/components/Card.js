@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { calcSpacing, setSpacing } from '../spacing';
-import { calcFontSize, setFontSize } from '../typo';
+import { calcSpacing, setSpacing } from '../UI/spacing';
+import { calcFontSize, setFontSize } from '../UI/typo';
 
 export const CardWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.cardColor};

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { setSpacing } from '../spacing';
+import { setSpacing } from '../UI/spacing';
 import { H1 } from '../components/Heading';
 import { Input } from '../components/Input';
 

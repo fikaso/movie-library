@@ -14,6 +14,8 @@ import LogoutIcon from '../../style/icons/Logout';
 import Add from '../../style/icons/Add';
 import { Flex } from '../../style/components/Flex';
 import { Container } from '../../style/components/Container';
+import EmptyList from '../EmptyList/EmptyList';
+import { Col, Grid } from '../../style/components/Grid';
 
 function MoviesList() {
   const dispatch = useDispatch();
@@ -27,48 +29,54 @@ function MoviesList() {
   }, [dispatch, movies]);
 
   return (
-    <Container>
-      <Header>
-        <Flex direction="row">
-          <H2>My movies</H2>
-          <Link to="/addMovie">
-            <Add />
-          </Link>
-        </Flex>
-        <Logout onClick={() => dispatch(logOut())}>
-          <TextRegular>Logout</TextRegular>
-          <LogoutIcon />
-        </Logout>
-      </Header>
+    <div>
+      {movies.movies.length !== 0 ? (
+        <>
+          <Header>
+            <Flex direction="row">
+              <H2>My movies</H2>
+              <Link to="/addMovie">
+                <Add />
+              </Link>
+            </Flex>
+            <Logout
+              onClick={() => {
+                dispatch(logOut());
+              }}
+            >
+              <TextRegular>Logout</TextRegular>
+              <LogoutIcon />
+            </Logout>
+          </Header>
 
-      <MoviesStyled>
-        {movies.movies.length !== 0 ? (
-          movies.movies.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie={movie}
-              editMovie={() =>
-                navigate(`/editMovie/${movie.id}`, {
-                  state: {
-                    prevTitle: movie.name,
-                    prevYear: movie.year,
-                    image: movie.image,
-                  },
-                })
-              }
-              deleteMovie={() => dispatch(deleteMovie({ id: movie.id }))}
-            />
-          ))
-        ) : (
-          <Flex direction="column">
-            <H2>Your movie list is empty</H2>
-            <Link to="/addMovie">
-              <Button large>Add a new movie</Button>
-            </Link>
-          </Flex>
-        )}
-      </MoviesStyled>
-    </Container>
+          <Grid
+            templateColumns={'repeat(4, minmax(120px, 1fr));'}
+            maxWidth={'1440px'}
+            gap={'24px'}
+            padding={'0 120px'}
+          >
+            {movies.movies.map((movie) => (
+              <Movie
+                key={movie.id}
+                movie={movie}
+                editMovie={() =>
+                  navigate(`/editMovie/${movie.id}`, {
+                    state: {
+                      prevTitle: movie.name,
+                      prevYear: movie.year,
+                      image: movie.image,
+                    },
+                  })
+                }
+                deleteMovie={() => dispatch(deleteMovie({ id: movie.id }))}
+              />
+            ))}
+          </Grid>
+        </>
+      ) : (
+        <EmptyList />
+      )}
+    </div>
   );
 }
 
