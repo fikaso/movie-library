@@ -2,7 +2,15 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const login = createAsyncThunk(
   'user/login',
-  async ({ email, password }) => {
+  async ({ email, password, remember }) => {
+    if (remember) {
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+    } else {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+    }
+
     const formData = new FormData();
     formData.append('identifier', email);
     formData.append('password', password);

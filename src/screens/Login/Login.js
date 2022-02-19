@@ -5,13 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { login, selectUser } from '../../redux/userSlice';
 import { Button } from '../../style/components/Button';
 import { H1 } from '../../style/components/Heading';
-import { Input } from '../../style/components/Input';
+import { CheckBoxContainer, Input } from '../../style/components/Input';
 import { LoginStyled, LoginWrapper } from '../../style/screens/Login';
 import { TextSmall } from '../../style/components/Text';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [remember, setRemember] = useState(true);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,13 +21,20 @@ function Login() {
   useEffect(() => {
     if (user?.status === 'success') {
       navigate('/');
+    } else {
+      const emailCache = localStorage.getItem('email');
+      const passwordCache = localStorage.getItem('password');
+      if (emailCache && passwordCache) {
+        setEmail(emailCache);
+        setPassword(passwordCache);
+      }
     }
   }, [user, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(login({ email: email, password: password }));
+    dispatch(login({ email: email, password: password, remember: remember }));
 
     setEmail('');
     setPassword('');
@@ -44,16 +52,25 @@ function Login() {
             value={email}
           />
           <Input
-            type="text"
+            type="password"
+            autocomplete="on"
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             value={password}
           />
         </div>
-        <div>
-          <input type="checkbox" />
-          <TextSmall>Remember me</TextSmall>
-        </div>
+        <CheckBoxContainer>
+          <Input
+            type="checkbox"
+            checked={remember}
+            onChange={() => setRemember(!remember)}
+            value={remember}
+            id="checkbox"
+          />
+          <label htmlFor="checkbox">
+            <TextSmall>Remember me</TextSmall>
+          </label>
+        </CheckBoxContainer>
         <Button large type="submit">
           Login
         </Button>
