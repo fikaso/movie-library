@@ -8,7 +8,7 @@ export const TextLarge = styled.span`
 
 export const TextRegular = styled.span`
   ${setFontSize(16, 16, 24)}
-  font-weight: ${(props) => props.theme.font.weight.regular};
+  font-weight: ${(props) => props.theme.font.weight.bold};
 `;
 
 export const TextSmall = styled.span`

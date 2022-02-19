@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMovie, getMovies, selectMovies } from '../../redux/moviesSlice';
@@ -16,11 +16,28 @@ import { Flex } from '../../style/components/Flex';
 import { Container } from '../../style/components/Container';
 import EmptyList from '../EmptyList/EmptyList';
 import { Col, Grid } from '../../style/components/Grid';
+import Pagination from '../../components/Pagination';
 
 function MoviesList() {
   const dispatch = useDispatch();
   const movies = useSelector(selectMovies);
   const navigate = useNavigate();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [moviesPerPage, setMoviesPerPage] = useState(8);
+
+  const indexOfLastMovie = currentPage * moviesPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+  const currentMovies = movies.movies.slice(
+    indexOfFirstMovie,
+    indexOfLastMovie
+  );
+
+  const changePage = (pageNum, numOfPages) => {
+    if (pageNum >= 1 && pageNum <= numOfPages) {
+      setCurrentPage(pageNum);
+    }
+  };
 
   useEffect(() => {
     if (movies?.status === null) {
@@ -48,14 +65,13 @@ function MoviesList() {
               <LogoutIcon />
             </Logout>
           </Header>
-
           <Grid
             templateColumns={'repeat(4, minmax(120px, 1fr));'}
             maxWidth={'1440px'}
             gap={'24px'}
             padding={'0 120px'}
           >
-            {movies.movies.map((movie) => (
+            {currentMovies.map((movie) => (
               <Movie
                 key={movie.id}
                 movie={movie}
@@ -72,6 +88,12 @@ function MoviesList() {
               />
             ))}
           </Grid>
+          <Pagination
+            items={movies.movies.length}
+            itemsPerPage={moviesPerPage}
+            currentPage={currentPage}
+            changePage={changePage}
+          />
         </>
       ) : (
         <EmptyList />
