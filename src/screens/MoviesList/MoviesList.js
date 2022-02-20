@@ -40,7 +40,12 @@ function MoviesList() {
   };
 
   useEffect(() => {
-    if (movies?.status === null) {
+    if (
+      movies?.status === null ||
+      movies?.status === 'addSuccess' ||
+      movies?.status === 'editSuccess' ||
+      movies?.status === 'deleteSuccess'
+    ) {
       dispatch(getMovies());
     }
   }, [dispatch, movies]);

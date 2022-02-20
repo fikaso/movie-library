@@ -10,7 +10,6 @@ export const getMovies = createAsyncThunk('movies/get', async () => {
       },
     }
   );
-  // console.log('response: ', response);
   return response.json();
 });
 
@@ -45,23 +44,20 @@ export const addMovie = createAsyncThunk(
       },
     });
 
-    const localImage = URL.createObjectURL(image);
-
-    // console.log('response: ', response);
     return response.json();
   }
 );
 
 export const editMovie = createAsyncThunk(
   'movie/edit',
-  async ({ title, year, id }) => {
+  async ({ title, year, image, id }) => {
     const movieData = {
       name: title,
       publicationYear: year,
     };
     const formData = new FormData();
     formData.append('data', JSON.stringify(movieData));
-    formData.append('files.poster', null);
+    formData.append('files.poster', image);
 
     const response = await fetch(`${process.env.REACT_APP_MOVIES_URL}/${id}`, {
       body: formData,
@@ -83,10 +79,9 @@ export const moviesSlice = createSlice({
   },
   extraReducers: {
     [getMovies.pending]: (state) => {
-      state.status = 'loading';
+      state.status = 'getLoading';
     },
     [getMovies.fulfilled]: (state, action) => {
-      // console.log('get action: ', action.payload);
       state.movies = [];
       action.payload.data.map((movie) =>
         state.movies.push({
@@ -96,60 +91,37 @@ export const moviesSlice = createSlice({
           id: movie.id,
         })
       );
-      state.status = 'success';
+      state.status = 'getSuccess';
     },
     [getMovies.rejected]: (state) => {
-      state.status = 'failed';
+      state.status = 'getFailed';
     },
     [deleteMovie.pending]: (state) => {
-      state.status = 'loading';
+      state.status = 'deleteLoading';
     },
     [deleteMovie.fulfilled]: (state, action) => {
-      state.movies = state.movies.filter(
-        (movie) => movie.id !== action.payload.data.id
-      );
-      state.status = 'success';
+      state.status = 'deleteSuccess';
     },
     [deleteMovie.rejected]: (state) => {
-      state.status = 'failed';
+      state.status = 'deleteFailed';
     },
     [addMovie.pending]: (state) => {
-      state.status = 'loading';
+      state.status = 'addLoading';
     },
     [addMovie.fulfilled]: (state, action) => {
-      // console.log('add action: ', action);
-      state.movies.push({
-        name: action.payload.data.attributes.name,
-        year: action.payload.data.attributes.publicationYear,
-        image: URL.createObjectURL(action.meta.arg.image),
-        id: action.payload.data.id,
-      });
-      state.status = 'success';
+      state.status = 'addSuccess';
     },
     [addMovie.rejected]: (state) => {
-      state.status = 'failed';
+      state.status = 'addFailed';
     },
     [editMovie.pending]: (state) => {
-      state.status = 'loading';
+      state.status = 'editLoading';
     },
     [editMovie.fulfilled]: (state, action) => {
-      // console.log('edit action: ', action);
-      state.movies = state.movies.map((movie) => {
-        if (movie.id === action.payload.id) {
-          return {
-            name: action.payload.attributes.name,
-            year: action.payload.attributes.publicationYear,
-            image: action.payload.attributes.files.poster,
-            id: action.payload.id,
-          };
-        } else {
-          return movie;
-        }
-      });
-      state.status = 'success';
+      state.status = 'editSuccess';
     },
     [editMovie.rejected]: (state) => {
-      state.status = 'failed';
+      state.status = 'editFailed';
     },
   },
 });
