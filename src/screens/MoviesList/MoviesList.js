@@ -22,7 +22,7 @@ function MoviesList() {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage, setMoviesPerPage] = useState(4);
+  const [moviesPerPage, setMoviesPerPage] = useState(8);
 
   const indexOfLastMovie = currentPage * moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
