@@ -5,4 +5,8 @@ export const FormStyled = styled.div`
   @media screen and ${media.tablet} {
     margin: 0 auto;
   }
+
+  p {
+    color: red;
+  }
 `;

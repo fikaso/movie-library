@@ -60,13 +60,13 @@ export const CardImage = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 12px 12px 0 0;
+    border-radius: ${calcFontSize(12)} ${calcFontSize(12)} 0 0;
     background: url('${(props) => props.url}');
     background-size: cover;
     background-position: center center;
 
     @media screen and ${media.minTablet} {
-      border-radius: 12px;
+      border-radius: ${calcFontSize(12)};
     }
   }
 `;

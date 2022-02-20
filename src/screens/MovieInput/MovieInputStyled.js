@@ -27,17 +27,17 @@ export const DropImageArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 380px;
-  height: 372px;
+  max-width: ${calcFontSize(380)};
+  height: ${calcFontSize(372)};
   margin: 0 auto ${calcSpacing(3)};
-  border: 1px dashed;
-  border-radius: 10px;
+  border: ${calcFontSize(1)} dashed;
+  border-radius: ${calcFontSize(10)};
   background-color: ${(props) => props.theme.colors.inputColor};
 
   @media screen and ${media.minTablet} {
     flex: 1;
-    max-width: 473px;
-    height: 504px;
+    max-width: ${calcFontSize(473)};
+    height: ${calcFontSize(504)};
     margin: 0;
     margin-right: 5%;
   }

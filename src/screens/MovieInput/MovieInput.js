@@ -10,6 +10,8 @@ import { CreateMovie } from './MovieInputStyled';
 import Header from '../../components/Header/Header';
 import { useDropzone } from 'react-dropzone';
 import Form from './components/Form';
+import Image from '../../components/Image/Image';
+// import Image from '../../components/Image/Image';
 function MovieInput() {
   const initialValues = { title: '', year: '', image: null };
   const [formValues, setFormValues] = useState(initialValues);
@@ -88,21 +90,20 @@ function MovieInput() {
   return (
     <div>
       <Header>
-        {editMode.id ? <H2>Edit movie</H2> : <h2>Create a new movie</h2>}
+        {editMode.id ? <H2>Edit</H2> : <h2>Create a new movie</h2>}
       </Header>
 
       <CreateMovie>
         <DropImageArea {...getRootProps()}>
           <input {...getInputProps()} />
           {formValues.image ? (
-            <img
+            <Image
               src={
                 typeof formValues.image === 'object'
                   ? URL.createObjectURL(formValues.image)
                   : formValues.image
               }
-              style={{ width: '100%' }}
-              alt="preview"
+              alt="MovieImage"
             />
           ) : (
             <>

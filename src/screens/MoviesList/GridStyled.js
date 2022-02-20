@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { media } from '../../style/theme/Responsive';
+import { calcFontSize } from '../../style/theme/Typo';
 
 export const Grid = styled.div`
   max-width: ${(props) => (props.maxWidth ? props.maxWidth : `1440px`)};
@@ -8,8 +9,8 @@ export const Grid = styled.div`
   @media screen and ${media.mobile} {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 40px 20px;
-    padding: 0 24px;
+    grid-gap: ${calcFontSize(40)} ${calcFontSize(20)};
+    padding: 0 ${calcFontSize(24)};
   }
 
   @media screen and ${media.minTablet} {

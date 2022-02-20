@@ -12,7 +12,6 @@ function Form({
   return (
     <FormStyled>
       <form onSubmit={handleSubmit}>
-        {(formErrors.title || formErrors.year) && <p>Fields are required</p>}
         <Input
           extended
           type="text"
@@ -22,6 +21,7 @@ function Form({
           value={formValues.title}
           onChange={handleChange}
         />
+        {formErrors.title && <p>Title is required</p>}
 
         <Input
           type="text"
@@ -31,6 +31,7 @@ function Form({
           value={formValues.year}
           onChange={handleChange}
         />
+        {formErrors.year && <p>Publication year is required</p>}
 
         <div>
           <Button secondary type="submit">

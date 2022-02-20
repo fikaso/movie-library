@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { media } from '../../style/theme/Responsive';
+import { calcFontSize } from '../../style/theme/Typo';
 
 export const MoviesStyled = styled.div``;
 
@@ -15,4 +17,11 @@ export const Flex = styled.div`
   flex-direction: ${(props) => props.direction};
   align-items: center;
   justify-content: space-between;
+
+  h2 {
+    font-size: ${calcFontSize(32)};
+    @media screen and ${media.minTablet} {
+      font-size: ${calcFontSize(46)};
+    }
+  }
 `;

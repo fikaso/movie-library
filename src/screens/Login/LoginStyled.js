@@ -22,6 +22,10 @@ export const LoginStyled = styled.div`
   ${Input} {
     ${setSpacing(3)};
   }
+
+  p {
+    color: red;
+  }
 `;
 
 export const CheckBoxContainer = styled.div`
@@ -53,10 +57,10 @@ export const CheckBoxContainer = styled.div`
   }
   label::before {
     content: '';
-    width: 18px;
-    height: 17px;
-    border-radius: 5px;
-    margin-right: 10px;
+    width: ${calcFontSize(18)};
+    height: ${calcFontSize(17)};
+    border-radius: ${calcFontSize(5)};
+    margin-right: ${calcFontSize(10)};
     background-color: ${(props) => props.theme.colors.inputColor};
   }
 `;
