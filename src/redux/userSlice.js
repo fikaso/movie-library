@@ -17,7 +17,13 @@ export const login = createAsyncThunk(
     return fetch(`${process.env.REACT_APP_LOGIN_URL}`, {
       body: formData,
       method: 'POST',
-    }).then((res) => res.json());
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(res);
+      }
+    });
   }
 );
 
@@ -40,13 +46,14 @@ export const userSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.user = {
-        name: action.payload.user.username,
-        email: action.payload.user.email,
+        name: action.payload.user?.username,
+        email: action.payload.user?.email,
       };
       localStorage.setItem('login_token', action.payload.jwt);
       state.status = 'success';
     },
     [login.rejected]: (state, action) => {
+      console.log('rejected: ', action);
       state.status = 'failed';
     },
   },

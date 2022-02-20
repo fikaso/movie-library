@@ -3,23 +3,22 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addMovie, editMovie } from '../../redux/moviesSlice';
 import { H2 } from '../../style/components/Heading';
-import { Input } from '../../style/components/Input';
-import { Button } from '../../style/components/Button';
 import Upload from '../../style/icons/Upload';
 import { TextSmall } from '../../style/components/Text';
 import { DropImageArea } from '../../style/components/DropImageArea';
 import { CreateMovie } from '../../style/components/CreateMovie';
-import { Form } from '../../style/components/Form';
 import Header from '../../components/Header';
 import { useDropzone } from 'react-dropzone';
+import Form from './components/Form';
 function MovieInput() {
-  const [title, setTitle] = useState('');
-  const [year, setYear] = useState('');
-  const [image, setImage] = useState(null);
+  const initialValues = { title: '', year: '', image: null };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
-      setImage(acceptedFiles[0]);
+      setFormValues({ ...formValues, image: acceptedFiles[0] });
     },
   });
 
@@ -28,41 +27,63 @@ function MovieInput() {
 
   useEffect(() => {
     if (state) {
-      setTitle(state.prevTitle);
-      setYear(state.prevYear);
-      setImage(state.image);
+      setFormValues({
+        title: state.prevTitle,
+        year: state.prevYear,
+        image: state.image,
+      });
     }
   }, [state]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const validate = (formValues) => {
+    const errors = {};
+    if (formValues.title === '' || !formValues.title) {
+      errors.title = 'Title is required';
+    }
+    if (formValues.year === '' || !formValues.year) {
+      errors.year = 'Publication year is required';
+    }
+    return errors;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormErrors({});
+    setFormValues({ ...formValues, [name]: value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (editMode.id) {
-      dispatch(
-        editMovie({
-          title: title,
-          year: year,
-          id: editMode.id,
-          image: image,
-        })
-      );
+    const errors = validate(formValues);
+
+    if (errors && Object.entries(errors).length !== 0) {
+      setFormErrors(errors);
     } else {
-      dispatch(
-        addMovie({
-          title: title,
-          year: year,
-          image: image,
-        })
-      );
+      if (editMode.id) {
+        dispatch(
+          editMovie({
+            title: formValues.title,
+            year: formValues.year,
+            id: editMode.id,
+            image: formValues.image,
+          })
+        );
+      } else {
+        dispatch(
+          addMovie({
+            title: formValues.title,
+            year: formValues.year,
+            image: formValues.image,
+          })
+        );
+      }
+      setFormValues(initialValues);
+      navigate('/');
     }
-
-    setTitle('');
-    setYear('');
-
-    navigate('/');
   };
   return (
     <div>
@@ -73,10 +94,12 @@ function MovieInput() {
       <CreateMovie>
         <DropImageArea {...getRootProps()}>
           <input {...getInputProps()} />
-          {image ? (
+          {formValues.image ? (
             <img
               src={
-                typeof image === 'object' ? URL.createObjectURL(image) : image
+                typeof formValues.image === 'object'
+                  ? URL.createObjectURL(formValues.image)
+                  : formValues.image
               }
               style={{ width: '100%' }}
               alt="preview"
@@ -88,29 +111,14 @@ function MovieInput() {
             </>
           )}
         </DropImageArea>
-        <Form>
-          <form onSubmit={handleSubmit}>
-            <Input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <Input
-              type="text"
-              placeholder="Publication year"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-            />
 
-            <div>
-              <Button secondary type="submit">
-                Submit
-              </Button>
-              <Button onClick={() => navigate('/')}>Cancel</Button>
-            </div>
-          </form>
-        </Form>
+        <Form
+          formValues={formValues}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleCancel={() => navigate('/')}
+          formErrors={formErrors}
+        />
       </CreateMovie>
     </div>
   );

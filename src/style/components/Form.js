@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { setSpacing } from '../UI/spacing';
 
-export const Form = styled.div`
+export const FormStyled = styled.div`
   margin-left: 127px;
 
   Input {
