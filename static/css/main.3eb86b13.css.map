@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.3eb86b13.css","mappings":"AAAA,0BAKE,YAAa,CACb,qBAAsB,CAFtB,YAGF","sources":["index.css"],"sourcesContent":["html,\r\nbody,\r\n#root,\r\n#root > div {\r\n  height: 100vh;\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n"],"names":[],"sourceRoot":""}
