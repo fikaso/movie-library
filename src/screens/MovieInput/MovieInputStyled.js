@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { media } from '../../style/theme/responsive';
-import { calcSpacing, setSpacing } from '../../style/theme/spacing';
-import { calcFontSize } from '../../style/theme/typo';
+import { media } from '../../style/theme/Responsive';
+import { calcSpacing, setSpacing } from '../../style/theme/Spacing';
+import { calcFontSize } from '../../style/theme/Typo';
 
 export const CreateMovie = styled.div`
   max-width: ${calcFontSize(1440)};

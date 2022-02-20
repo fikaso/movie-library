@@ -1,4 +1,4 @@
-import { calcFontSize } from './typo';
+import { calcFontSize } from './Typo';
 
 export const calcSpacing = (multiplier, base = 8) => {
   return `${calcFontSize(multiplier * base)}`;

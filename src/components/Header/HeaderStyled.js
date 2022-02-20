@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { setSpacing } from '../../style/theme/spacing';
+import { setSpacing } from '../../style/theme/Spacing';
 
 export const HeaderStyled = styled.div`
   display: flex;

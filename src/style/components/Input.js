@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { calcFontSize, setFontSize } from '../theme/typo';
-import { setSpacing } from '../theme/spacing';
-import { media } from '../theme/responsive';
+import { calcFontSize, setFontSize } from '../theme/Typo';
+import { setSpacing } from '../theme/Spacing';
+import { media } from '../theme/Responsive';
 
 const InputDefault = styled.input`
   ${setFontSize(14, 16, 24)};

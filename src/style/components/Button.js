@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { calcFontSize, setFontSize } from '../theme/typo';
+import { calcFontSize, setFontSize } from '../theme/Typo';
 
 const ButtonDefault = styled.button`
   ${setFontSize(16, 16, 24)}

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { H1 } from '../../style/components/Heading';
 import { Input } from '../../style/components/Input';
-import { calcSpacing, setSpacing } from '../../style/theme/spacing';
-import { calcFontSize } from '../../style/theme/typo';
+import { calcSpacing, setSpacing } from '../../style/theme/Spacing';
+import { calcFontSize } from '../../style/theme/Typo';
 
 export const LoginStyled = styled.div`
   display: flex;

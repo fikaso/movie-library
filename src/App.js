@@ -4,8 +4,8 @@ import AddMovie from './screens/MovieInput/MovieInput';
 import EditMovie from './screens/MovieInput/MovieInput';
 import Login from './screens/Login/Login';
 import MoviesList from './screens/MoviesList/MoviesList';
-import GlobalStyle from './style/theme/global';
-import Theme from './style/theme/theme';
+import GlobalStyle from './style/theme/Global';
+import Theme from './style/theme/Theme';
 
 function App() {
   return (

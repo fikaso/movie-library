@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 
-import { colors } from './colors';
-import { spacing } from './spacing';
-import { typo } from './typo';
+import { colors } from './Colors';
+import { spacing } from './Spacing';
+import { typo } from './Typo';
 
 const theme = {
   colors: colors,

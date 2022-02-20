@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { media } from '../../../style/theme/responsive';
-import { calcSpacing, setSpacing } from '../../../style/theme/spacing';
-import { calcFontSize, setFontSize } from '../../../style/theme/typo';
+import { media } from '../../../style/theme/Responsive';
+import { calcSpacing, setSpacing } from '../../../style/theme/Spacing';
+import { calcFontSize, setFontSize } from '../../../style/theme/Typo';
 
 export const CardWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.cardColor};
