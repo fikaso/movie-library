@@ -6,7 +6,7 @@ import { login, selectUser } from '../../redux/userSlice';
 import { Button } from '../../style/components/Button';
 import { H1 } from '../../style/components/Heading';
 import { CheckBoxContainer, Input } from '../../style/components/Input';
-import { LoginStyled, LoginWrapper } from '../../style/screens/Login';
+import { LoginStyled, LoginWrapper } from './style';
 import { TextSmall } from '../../style/components/Text';
 
 function Login() {

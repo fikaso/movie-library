@@ -14,6 +14,7 @@ function Form({
       <form onSubmit={handleSubmit}>
         {(formErrors.title || formErrors.year) && <p>Fields are required</p>}
         <Input
+          extended
           type="text"
           placeholder="Title"
           name="title"

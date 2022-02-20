@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import AddMovie from './screens/AddMovie/MovieInput';
 import EditMovie from './screens/AddMovie/MovieInput';
-import Login from './screens/Login/Login';
+import Login from './screens/Login/';
 import MoviesList from './screens/MoviesList/MoviesList';
 import GlobalStyle from './style/UI/global';
 import Theme from './style/UI/theme';

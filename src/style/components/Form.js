@@ -1,15 +1,9 @@
 import styled from 'styled-components';
+import { media } from '../UI/responsive';
 import { setSpacing } from '../UI/spacing';
 
 export const FormStyled = styled.div`
-  margin-left: 127px;
-
-  Input {
-    ${setSpacing(4)}
-  }
-
-  div {
-    display: flex;
-    justify-content: space-between;
+  @media screen and ${media.tablet} {
+    margin: 0 auto;
   }
 `;

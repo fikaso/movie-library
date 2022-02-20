@@ -24,7 +24,7 @@ function MoviesList() {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage, setMoviesPerPage] = useState(8);
+  const [moviesPerPage, setMoviesPerPage] = useState(4);
 
   const indexOfLastMovie = currentPage * moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
@@ -51,7 +51,7 @@ function MoviesList() {
   }, [dispatch, movies]);
 
   return (
-    <div>
+    <MoviesStyled>
       {movies.movies.length !== 0 ? (
         <>
           <Header>
@@ -103,7 +103,7 @@ function MoviesList() {
       ) : (
         <EmptyList />
       )}
-    </div>
+    </MoviesStyled>
   );
 }
 

@@ -10,6 +10,6 @@ export const HeaderStyled = styled.div`
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
-  padding: 120px 120px 0 120px;
+  /* padding: 120px 120px 0 120px; */
   ${setSpacing(15)};
 `;

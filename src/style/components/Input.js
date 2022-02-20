@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { calcFontSize, setFontSize } from '../UI/typo';
 import { calcSpacing, setSpacing } from '../UI/spacing';
+import { media } from '../UI/responsive';
 
 const InputDefault = styled.input`
   ${setFontSize(14, 16, 24)};
@@ -21,14 +22,26 @@ const InputDefault = styled.input`
 `;
 
 export const Input = styled(InputDefault)`
-  max-width: ${calcFontSize(300)};
+  width: 100%;
   background: ${(props) => props.theme.colors.inputColor};
   border: 1px solid ${(props) => props.theme.colors.backgroundColor};
   transition: all 0.2s linear;
+
+  @media screen and ${media.minTablet} {
+    max-width: ${calcFontSize(300)};
+  }
+
   :hover,
   :focus {
     border: 1px solid ${(props) => props.theme.colors.inputColor};
   }
+  ${(props) =>
+    props.extended &&
+    css`
+      @media screen and ${media.minTablet} {
+        max-width: ${calcFontSize(362)};
+      }
+    `}
   ${(props) =>
     props.error &&
     css`
