@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { calcFontSize, setFontSize } from '../UI/typo';
-import { calcSpacing, setSpacing } from '../UI/spacing';
-import { media } from '../UI/responsive';
+import { calcFontSize, setFontSize } from '../theme/typo';
+import { setSpacing } from '../theme/spacing';
+import { media } from '../theme/responsive';
 
 const InputDefault = styled.input`
   ${setFontSize(14, 16, 24)};
@@ -60,41 +60,4 @@ export const Input = styled(InputDefault)`
         }
       }
     `}
-`;
-
-export const CheckBoxContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  ${setSpacing(3)};
-  Input {
-    opacity: 0;
-    width: 0;
-  }
-
-  Input:checked + label::before {
-    background-color: ${(props) => props.theme.colors.primary};
-    content: '✔';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  label {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  label:hover::before {
-    background-color: ${(props) => props.theme.colors.cardColor};
-  }
-  label::before {
-    content: '';
-    width: 18px;
-    height: 17px;
-    border-radius: 5px;
-    margin-right: 10px;
-    background-color: ${(props) => props.theme.colors.inputColor};
-  }
 `;

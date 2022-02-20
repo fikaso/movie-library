@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from '../UI/responsive';
+import { media } from '../../style/theme/responsive';
 
 export const Grid = styled.div`
   max-width: ${(props) => (props.maxWidth ? props.maxWidth : `1440px`)};

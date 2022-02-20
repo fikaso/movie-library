@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { selectUser } from '../redux/userSlice';
+import { selectUser } from '../../redux/userSlice';
 import { useSelector } from 'react-redux';
 
 function ProtectedRoute() {

@@ -1,4 +1,4 @@
-import { HeaderStyled } from '../style/components/Header';
+import { HeaderStyled } from './HeaderStyled';
 
 function Header({ children }) {
   return <HeaderStyled>{children}</HeaderStyled>;

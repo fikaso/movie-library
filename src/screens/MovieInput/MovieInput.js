@@ -5,9 +5,9 @@ import { addMovie, editMovie } from '../../redux/moviesSlice';
 import { H2 } from '../../style/components/Heading';
 import Upload from '../../style/icons/Upload';
 import { TextSmall } from '../../style/components/Text';
-import { DropImageArea } from '../../style/components/DropImageArea';
-import { CreateMovie } from '../../style/components/CreateMovie';
-import Header from '../../components/Header';
+import { DropImageArea } from './MovieInputStyled';
+import { CreateMovie } from './MovieInputStyled';
+import Header from '../../components/Header/Header';
 import { useDropzone } from 'react-dropzone';
 import Form from './components/Form';
 function MovieInput() {

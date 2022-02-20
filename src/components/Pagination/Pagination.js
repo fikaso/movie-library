@@ -1,8 +1,5 @@
-import {
-  PaginationNumber,
-  PaginationStyled,
-} from '../style/components/Pagination';
-import { TextRegular } from '../style/components/Text';
+import { PaginationNumber, PaginationStyled } from './PaginationStyled';
+import { TextRegular } from '../../style/components/Text';
 
 function Pagination({ items, itemsPerPage, changePage, currentPage }) {
   const numOfPages = Math.ceil(items / itemsPerPage);

@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ProtectedRoute from './components/ProtectedRoute';
-import AddMovie from './screens/AddMovie/MovieInput';
-import EditMovie from './screens/AddMovie/MovieInput';
-import Login from './screens/Login/';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import AddMovie from './screens/MovieInput/MovieInput';
+import EditMovie from './screens/MovieInput/MovieInput';
+import Login from './screens/Login/Login';
 import MoviesList from './screens/MoviesList/MoviesList';
-import GlobalStyle from './style/UI/global';
-import Theme from './style/UI/theme';
+import GlobalStyle from './style/theme/global';
+import Theme from './style/theme/theme';
 
 function App() {
   return (

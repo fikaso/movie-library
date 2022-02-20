@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { setFontSize } from '../../style/UI/typo';
+import { setFontSize } from '../theme/typo';
 
 export const H1 = styled.h1`
   ${setFontSize(64, 16, 80)}

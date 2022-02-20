@@ -1,5 +1,5 @@
 import { Button } from '../../../style/components/Button';
-import { FormStyled } from '../../../style/components/Form';
+import { FormStyled } from './FormStyled';
 import { Input } from '../../../style/components/Input';
 
 function Form({

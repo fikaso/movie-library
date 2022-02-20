@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../style/components/Button';
-import { EmptyListStyled } from '../../style/components/EmptyList';
+import { EmptyListStyled } from './EmptyListStyled';
 import { H2 } from '../../style/components/Heading';
 
 function EmptyList() {

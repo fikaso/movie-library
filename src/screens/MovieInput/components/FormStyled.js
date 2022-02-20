@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { media } from '../UI/responsive';
-import { setSpacing } from '../UI/spacing';
+import { media } from '../../../style/theme/responsive';
 
 export const FormStyled = styled.div`
   @media screen and ${media.tablet} {

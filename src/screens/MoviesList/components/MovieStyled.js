@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { media } from '../UI/responsive';
-import { calcSpacing, setSpacing } from '../UI/spacing';
-import { calcFontSize, setFontSize } from '../UI/typo';
+import { media } from '../../../style/theme/responsive';
+import { calcSpacing, setSpacing } from '../../../style/theme/spacing';
+import { calcFontSize, setFontSize } from '../../../style/theme/typo';
 
 export const CardWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.cardColor};
@@ -69,4 +69,11 @@ export const CardImage = styled.div`
       border-radius: 12px;
     }
   }
+`;
+
+export const MovieDesc = styled.div`
+  display: flex;
+  flex-direction: ${(props) => props.direction};
+  align-items: center;
+  justify-content: space-between;
 `;

@@ -1,18 +1,37 @@
 import styled from 'styled-components';
-import { media } from '../UI/responsive';
-import { calcSpacing, setSpacing } from '../UI/spacing';
+import { media } from '../../style/theme/responsive';
+import { calcSpacing, setSpacing } from '../../style/theme/spacing';
+import { calcFontSize } from '../../style/theme/typo';
+
+export const CreateMovie = styled.div`
+  max-width: ${calcFontSize(1440)};
+  padding: 0 ${calcSpacing(3)};
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    padding: 0%;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 1440px) {
+  }
+`;
 
 export const DropImageArea = styled.div`
+  ${setSpacing(3)}
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   max-width: 380px;
   height: 372px;
   margin: 0 auto ${calcSpacing(3)};
   border: 1px dashed;
   border-radius: 10px;
-  align-items: center;
   background-color: ${(props) => props.theme.colors.inputColor};
 
   @media screen and ${media.minTablet} {

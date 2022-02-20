@@ -2,21 +2,19 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMovie, getMovies, selectMovies } from '../../redux/moviesSlice';
-import { MoviesStyled } from '../../style/screens/MoviesList';
-import { Button } from '../../style/components/Button';
+import { MoviesStyled } from './MoviesListStyled';
 import { H2 } from '../../style/components/Heading';
 import Movie from './components/Movie';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import { logOut } from '../../redux/userSlice';
 import { TextRegular } from '../../style/components/Text';
-import { Logout } from '../../style/components/Logout';
+import { Logout } from './MoviesListStyled';
 import LogoutIcon from '../../style/icons/Logout';
 import Add from '../../style/icons/Add';
-import { Flex } from '../../style/components/Flex';
-import { Container } from '../../style/components/Container';
+import { Flex } from './MoviesListStyled';
 import EmptyList from '../EmptyList/EmptyList';
-import { Col, Grid } from '../../style/components/Grid';
-import Pagination from '../../components/Pagination';
+import { Col, Grid } from './GridStyled';
+import Pagination from '../../components/Pagination/Pagination';
 
 function MoviesList() {
   const dispatch = useDispatch();
@@ -77,20 +75,21 @@ function MoviesList() {
             padding={'0 120px'}
           >
             {currentMovies.map((movie) => (
-              <Movie
-                key={movie.id}
-                movie={movie}
-                editMovie={() =>
-                  navigate(`/editMovie/${movie.id}`, {
-                    state: {
-                      prevTitle: movie.name,
-                      prevYear: movie.year,
-                      image: movie.image,
-                    },
-                  })
-                }
-                deleteMovie={() => dispatch(deleteMovie({ id: movie.id }))}
-              />
+              <Col key={movie.id}>
+                <Movie
+                  movie={movie}
+                  editMovie={() =>
+                    navigate(`/editMovie/${movie.id}`, {
+                      state: {
+                        prevTitle: movie.name,
+                        prevYear: movie.year,
+                        image: movie.image,
+                      },
+                    })
+                  }
+                  deleteMovie={() => dispatch(deleteMovie({ id: movie.id }))}
+                />
+              </Col>
             ))}
           </Grid>
           <Pagination
