@@ -50,7 +50,58 @@ function MoviesList() {
 
   return (
     <MoviesStyled>
-      {movies.movies.length !== 0 ? <EmptyList /> : <EmptyList />}
+      {movies.movies.length !== 0 ? (
+        <>
+          <Header>
+            <Flex direction="row">
+              <H2>My movies</H2>
+              <Link to="/addMovie">
+                <Add />
+              </Link>
+            </Flex>
+            <Logout
+              onClick={() => {
+                dispatch(logOut());
+              }}
+            >
+              <TextRegular>Logout</TextRegular>
+              <LogoutIcon />
+            </Logout>
+          </Header>
+          <Grid
+            templateColumns={'repeat(4, minmax(120px, 1fr));'}
+            maxWidth={'1440px'}
+            gap={'24px'}
+            padding={'0 120px'}
+          >
+            {currentMovies.map((movie) => (
+              <Col key={movie.id}>
+                <Movie
+                  movie={movie}
+                  editMovie={() =>
+                    navigate(`/editMovie/${movie.id}`, {
+                      state: {
+                        prevTitle: movie.name,
+                        prevYear: movie.year,
+                        image: movie.image,
+                      },
+                    })
+                  }
+                  deleteMovie={() => dispatch(deleteMovie({ id: movie.id }))}
+                />
+              </Col>
+            ))}
+          </Grid>
+          <Pagination
+            items={movies.movies.length}
+            itemsPerPage={moviesPerPage}
+            currentPage={currentPage}
+            changePage={changePage}
+          />
+        </>
+      ) : (
+        <EmptyList />
+      )}
     </MoviesStyled>
   );
 }
