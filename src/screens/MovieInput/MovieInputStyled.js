@@ -16,20 +16,16 @@ export const CreateMovie = styled.div`
     margin: 0 auto;
     width: 100%;
   }
-
-  @media screen and (min-width: 1440px) {
-  }
 `;
 
 export const DropImageArea = styled.div`
-  ${setSpacing(3)}
   width: 100%;
+  margin: 0 auto ${calcFontSize(20)};
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: ${calcFontSize(380)};
   height: ${calcFontSize(372)};
-  margin: 0 auto ${calcSpacing(3)};
   border: ${calcFontSize(1)} dashed;
   border-radius: ${calcFontSize(10)};
   background-color: ${(props) => props.theme.colors.inputColor};

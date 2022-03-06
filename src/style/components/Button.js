@@ -5,8 +5,8 @@ const ButtonDefault = styled.button`
   ${setFontSize(16, 16, 24)}
   color: ${(props) => props.theme.colors.text};
   font-weight: ${(props) => props.theme.font.weight.bold};
-  width: 100%;
-  padding: ${calcFontSize(16)} 0;
+  max-width: 100%fit-content;
+  padding: ${calcFontSize(16)};
   border-radius: ${calcFontSize(10)};
   outline: none;
   border: none;

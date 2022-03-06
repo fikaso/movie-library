@@ -1,5 +1,5 @@
 import { Button } from '../../../style/components/Button';
-import { FormStyled } from './FormStyled';
+import { FormButtons, FormStyled } from './FormStyled';
 import { Input } from '../../../style/components/Input';
 
 function Form({
@@ -33,12 +33,12 @@ function Form({
         />
         {formErrors.year && <p>Publication year is required</p>}
 
-        <div>
+        <FormButtons>
           <Button secondary type="submit">
             Submit
           </Button>
           <Button onClick={handleCancel}>Cancel</Button>
-        </div>
+        </FormButtons>
       </form>
     </FormStyled>
   );
